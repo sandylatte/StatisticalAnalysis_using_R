@@ -1,0 +1,44 @@
+---
+title: "Sample T-Test "
+output: html_notebook
+---
+
+Source of Data Frame
+
+```{r}
+df <- read.csv("T Test - 1.csv")
+head(df)
+```
+
+
+
+```{r}
+df1 <- df[3]
+head(df1)
+```
+
+Last Year Average
+
+```{r}
+last.year.average <- 6.7
+print(last.year.average)
+print(mean(df$nilai_sd_jogja))
+```
+
+# Hypothesis
+
+* H<sub>0</sub> = There is no significant correlation between last year data average and this year data average. (Accepted if p-value > 0.05)
+* H<sub>1</sub> = There is a significant correlation between last year data average and this year data average. (Accepted if p-value < 0.05)
+
+# Inferential Statistics
+
+We will use 1 Sample T-Test because we only use 1 reference data and 1 raw data.
+
+```{r}
+#print(t.test(raw.data, mu = reference.data))
+print(t.test(df1, mu = last.year.average))
+```
+
+So, the conclusion is that there is no significant correlation between last year data average and this year data average.
+
+***
