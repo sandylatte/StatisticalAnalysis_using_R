@@ -39,6 +39,6 @@ We will use 1 Sample T-Test because we only use 1 reference data and 1 raw data.
 print(t.test(df1, mu = last.year.average))
 ```
 
-So, the conclusion is that there is no significant correlation between last year data average and this year data average.
+Since p-value: 0.51 is larger than alpha: 0.05, the conclusion is that there is no significant correlation between last year data average and this year data average.
 
 ***
