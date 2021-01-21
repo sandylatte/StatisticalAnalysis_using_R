@@ -1,0 +1,43 @@
+---
+title: "2 Sample T-Test "
+output: html_notebook
+---
+
+Source of Data Frame
+
+```{r}
+df <- read.csv("T Test - 1.csv")
+head(df)
+```
+
+feature = nilai_sd_1 as df1
+
+```{r}
+df1 <- df[3]
+head(df1)
+```
+
+feature = nilai_sd_jogja as df2
+
+```{r}
+df2 <- df[2]
+head(df2)
+```
+
+# Hypothesis
+
+* H<sub>0</sub> = There is no significant difference between sd 1 and sd jogja. (Accepted if p-value > 0.05)
+* H<sub>1</sub> = There is a significant difference between sd 1 and sd jogja. (Accepted if p-value < 0.05)
+
+# Inferential Statistics
+
+We will use 2 Sample T-Test because we only 2 raw data.
+
+```{r}
+#print(t.test(data1, data2))
+print(t.test(df2, df1))
+```
+
+In conclusion, there is a significant difference between sd 1 and sd jogja.
+
+***
