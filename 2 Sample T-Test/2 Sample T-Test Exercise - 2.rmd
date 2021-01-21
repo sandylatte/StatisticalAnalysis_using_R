@@ -1,0 +1,94 @@
+---
+title: "2 Sample T-Test - Exercise"
+output: html_notebook
+---
+
+Source of Data Frame
+
+```{r}
+df <- read.csv("T Test - 2.csv")
+print(head(df))
+```
+
+feature = penjualan.sebelum.latihan as Data Frame 1 (df1)
+
+```{r}
+df1 <- df[2]
+head(df1)
+```
+
+feature = penjualan.setelah.latihan as Data Frame 2 (df2)
+
+```{r}
+df2 <- df[3]
+head(df2)
+```
+
+# Hypothesis
+
+* H<sub>0</sub> = There is no significant difference of performance between employee before they receive sales training and employee after they receive sales training. (Accepted if p-value > 0.05)
+* H<sub>1</sub> = There is a significant difference of performance between employee before they receive sales training and employee after they receive sales training. (Accepted if p-value < 0.05)
+
+# Inferential Statistics
+
+We will use 2 Sample T-Test because we only 2 raw data.
+
+```{r}
+hasil <- t.test(df2, df1)
+print(hasil)
+```
+
+```{r}
+p.value <- hasil[["p.value"]]
+print(p.value)
+```
+
+```{r}
+before <- hasil[["estimate"]][["mean of y"]]
+after <- hasil[["estimate"]][["mean of x"]]
+boost <- ((after - before)/before)*100
+boost.amount <- (paste(boost, "%"))
+print(boost.amount)
+```
+
+```{r}
+terminated <- df[(df1>df2), 1]
+print(terminated)
+```
+
+# Conclusion
+
+1. is there any significant difference of performance after the employee receive sales training?
+
+        So, the conclusion is that **there is a significant difference** of performance between employee before they receive sales training and employee after they receive sales training. Because `r p.value` is smaller than 0.05.
+
+2. If there is a difference, is it better or worse?
+
+        It is better, because the performance average has boosted `r boost.amount` compared to their performance average before receive sales training. (mean x > mean y)
+
+3. Should we continue this training?
+
+        Yes, because there is a significant difference after they receive this training and it boosted the performance by `r boost.amount`.
+
+4. Who should be terminated to increase efficiency in sales team?
+
+        The salesman number `r terminated` who should be terminated because his performance is declined after sales training.
+
+
+***
+
+
+```{r}
+plot(density(df$penjualan.sebelum.latihan),
+     col = rgb(1, 0, 0, 1),
+     main = "Comparison",
+     xlim = c(0, 10),
+     ylim = c(0, 0.7))
+par(new = TRUE)
+plot(density(df$penjualan.setelah.latihan),
+     col = rgb(1, 1, 0, 1),
+     main = "",
+     xlim = c(0, 10),
+     ylim = c(0, 0.7))
+```
+
