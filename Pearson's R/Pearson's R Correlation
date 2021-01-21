@@ -1,0 +1,46 @@
+---
+title: "Pearson's R Correlation"
+output: html_notebook
+---
+
+# Load Data
+```{r}
+df <- read.csv('survey.csv')
+print(head(df))
+```
+
+# Data Cleaning (Excluding NA)
+
+```{r}
+#complete.cases(df) #not recommended, because it looks like a lazy work
+df1 <- df[complete.cases(df), ]
+head(df1)
+```
+
+# Hypothesis
+
+* H<sub>0</sub> = There is no significant correlation between Wr.Hand and Height. (Accepted if correlation = 0)
+* H<sub>1</sub> = There is a correlation between Wr.Hand and Height. (Accepted if correlation != 0)
+
+# Inferential Test
+
+```{r}
+cor(df1$Wr.Hnd, df1$Height)
+```
+
+# Conclusion
+
+So, there is a less significant positive correlation between Wr.Hand and Height.
+
+#Load Data
+
+**Show only Numerical Features** 
+
+```{r}
+df2 <- df1[c(3, 4, 7, 11, 13)]
+head(df2)
+```
+
+```{r}
+cor(df2)
+```
