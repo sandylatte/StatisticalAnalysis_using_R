@@ -1,0 +1,41 @@
+---
+title: "Chi-squared Test"
+output: html_notebook
+---
+
+# Load Data
+```{r}
+df <- read.csv('survey.csv')
+print(head(df))
+```
+
+# inputing NA 
+
+```{r}
+#complete.cases(df) #not recommended, because it looks like a lazy work
+df1 <- df[complete.cases(df), ]
+head(df1)
+```
+
+# Hypothesis
+
+* H<sub>0</sub> = There is no significant relationship between W.Hand and Clap. (Accepted if p-value > 0.05)
+* H<sub>1</sub> = There is a significant relationship between W.Hand and Clap. (Accepted if p-value < 0.05)
+
+# Inferential Test
+
+```{r}
+result <- chisq.test(table(c(df1[5], df1[8])))
+print(result)
+```
+```{r}
+p.value <- result[["p.value"]]
+print(p.value)
+```
+
+# Conclusion
+
+So, there is a significant correlation between W.Hand and Clap. Because `r p.value` is lower than 0.05.
+
+
+
