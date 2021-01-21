@@ -1,0 +1,42 @@
+---
+title: "Anova"
+output: html_notebook
+---
+
+# Load Data
+```{r}
+df <- read.csv('anova.csv')
+print(head(df))
+```
+
+Relevant Data 1
+
+```{r}
+df1 <- df[-1]
+head(df1)
+```
+
+Melting Data
+
+```{r}
+library(reshape2)
+
+df2 <- melt(df1)
+print(df2)
+```
+
+# Hypothesis
+
+* H<sub>0</sub> = There is no significant variance between vendor A, B, and C. (Accepted if p-value > 0.05)
+* H<sub>1</sub> = There is a significant variance between vendor A, B, and C. (Accepted if p-value < 0.05)
+
+# Inferential Test
+
+```{r}
+library(easyanova)
+ea1(df2)
+```
+
+# Conclusion
+
+So, there is no significant variance between vendor A, B, and C.
